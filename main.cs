@@ -24,7 +24,6 @@ class Program
             cardNumber = cardNumber.Replace(" ", "");
         // cast string to decimal and increase by 1 
         decimal nextValidCardNumber = Decimal.Parse(cardNumber)+1;
-        nextValidCardNumber++;
 
         // check if new card number pass verification (Luhn algo) 
         while (!IsCreditCardNumberValid(nextValidCardNumber.ToString()))
@@ -35,7 +34,7 @@ class Program
     
     static bool IsCreditCardNumberValid(string cardNumber)
     {
-        int sumEven=0, sumOdd=0;
+        int sumOfDigits=0;
         
         // check if card number contains white spaces
         if (cardNumber.Contains(" "))
@@ -50,17 +49,17 @@ class Program
                     // Two times each even digit ()
                     // if multiplication > 9 substrac 9
                     // sum the digits of each multiplication:
-                    sumEven += curDigit*2>9 ? (curDigit*2-9) : (curDigit*2);
+                    sumOfDigits += curDigit*2>9 ? (curDigit*2-9) : (curDigit*2);
                 }
                 else
                 {
                     // sum of the odd digits
-                    sumOdd+=curDigit;
+                    sumOfDigits+=curDigit;
                 }
             }
             
         // check if modulo 10 is equal to 0 
-        return (sumEven+sumOdd)%10 == 0;
+        return sumOfDigits % 10 == 0;
     }
 
     static string GetCreditCardVendor(string cardNumber)
