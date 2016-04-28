@@ -41,11 +41,11 @@ class Program
         if (cardNumber.Contains(" "))
             cardNumber = cardNumber.Replace(" ", "");
             
-            for(int i = cardNumber.Length-1; i>=0; i--)
+            for(int i = cardNumber.Length-1,j=1; i>=0; i--,j++)
             {
                 int curDigit = Int32.Parse(cardNumber.Substring(i,1));
                 
-                if (i%2==0)
+                if (j%2==0)
                 {
                     // Two times each even digit ()
                     // if multiplication > 9 substrac 9
