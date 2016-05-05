@@ -14,7 +14,7 @@ class Program
         // task # 2
         Console.WriteLine("Task #2\nCard number: {0}", IsCreditCardNumberValid(creditCardNumber) ? "valid" : "invalid");
         //task # 3
-        Console.WriteLine("Task #3\nNext valid credit number according to Luhn formula: {0}", GenerateNextCreditCarddNumber(creditCardNumber));
+        Console.WriteLine("Task #3\nNext valid credit card number: {0}", GenerateNextCreditCarddNumber(creditCardNumber));
         Console.WriteLine("\nThank you\n");
     }
 
@@ -25,7 +25,6 @@ class Program
     {
         //split range
         string[] subRange = range.Split(',');
-
         foreach (string currSubRange in subRange)
         {
             if (currSubRange.Contains("-") == true)
@@ -45,13 +44,11 @@ class Program
                     return true;
                 }
             }
-
         }
-
         return false;
     }
 
-    static string GenerateNextCreditCarddNumber(string cardNumber)
+     static string GenerateNextCreditCarddNumber(string cardNumber)
     {
         // check if card number contains white spaces
         if (cardNumber.Contains(" "))
@@ -63,7 +60,14 @@ class Program
         while (!IsCreditCardNumberValid(nextValidCardNumber.ToString()))
             nextValidCardNumber++;
 
-        return nextValidCardNumber.ToString();
+        if (String.Compare ( GetCreditCardVendor(nextValidCardNumber.ToString()), GetCreditCardVendor(cardNumber)) == 0)
+        {
+            return nextValidCardNumber.ToString();
+        }
+        else
+        {
+            return "No valid card number for given vendor";
+        }
     }
 
     static bool IsCreditCardNumberValid(string cardNumber)
