@@ -6,7 +6,7 @@ class Program
     static void Main()
     {
         string creditCardNumber = "6168 0155 1234 0624";
-        //creditCardNumber = "35301113333000001";
+        creditCardNumber = "35301113333000001";
         Console.WriteLine("\nHello there,\n\nThe given card number: {0}", creditCardNumber);
         // task # 1
         Console.WriteLine("Task #1\nCard vendor: {0}", GetCreditCardVendor(creditCardNumber));
@@ -59,7 +59,7 @@ class Program
         while (!PassLuhn(nextValidCardNumber.ToString()))
             nextValidCardNumber++;
 
-        if (String.Compare ( GetCreditCardVendor(nextValidCardNumber.ToString()), GetCreditCardVendor(cardNumber)) == 0)
+        if (String.Compare(GetCreditCardVendor(nextValidCardNumber.ToString()), GetCreditCardVendor(cardNumber)) == 0 && IsCreditCardNumberValid(nextValidCardNumber.ToString()))
         {
             return nextValidCardNumber.ToString();
         }
