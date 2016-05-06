@@ -87,7 +87,7 @@ class Program
                 // Two times each even digit ()
                 // if multiplication > 10 substrac 9
                 // sum the digits of each multiplication:
-                sumOfDigits += curDigit > 5 ? (curDigit * 2 - 9) : (curDigit * 2);
+                sumOfDigits += curDigit * 2 > 9 ? (curDigit * 2 - 9) : (curDigit * 2);
             }
             else
             {
