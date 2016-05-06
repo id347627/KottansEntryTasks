@@ -7,7 +7,7 @@ class Program
     {
 
         string creditCardNumber = "6168 0155 1234 0624";
-        //creditCardNumber = "3434343434343433";
+        //creditCardNumber = "50000000000006114";
         Console.WriteLine("\nHello there,\n\nThe given card number: {0}", creditCardNumber);
         // task # 1
         Console.WriteLine("Task #1\nCard vendor: {0}", GetCreditCardVendor(creditCardNumber));
@@ -118,7 +118,7 @@ class Program
         // check given card number
         foreach(CardInfo currCard in cardVendorList)
         {
-            if (CheckRange(cardNumber, currCard.IIN) && CheckRange(cardNumber.Length.ToString(), currCard.cardNumberLenght)) 
+            if (CheckRange(cardNumber, currCard.IIN) && CheckRange(cardNumber.Length.ToString(), currCard.cardNumberLenght) && IsCreditCardNumberValid(cardNumber)) 
             {
                 return currCard.cardIssuer;
             }
@@ -149,3 +149,4 @@ public class CardInfo
         this.cardNumberLenght = ob.cardNumberLenght;
     }
 }
+
