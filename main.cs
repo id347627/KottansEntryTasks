@@ -5,9 +5,8 @@ class Program
 {
     static void Main()
     {
-
         string creditCardNumber = "6168 0155 1234 0624";
-        //creditCardNumber = "50000000000006114";
+        //creditCardNumber = "35301113333000001";
         Console.WriteLine("\nHello there,\n\nThe given card number: {0}", creditCardNumber);
         // task # 1
         Console.WriteLine("Task #1\nCard vendor: {0}", GetCreditCardVendor(creditCardNumber));
@@ -57,7 +56,7 @@ class Program
         decimal nextValidCardNumber = Decimal.Parse(cardNumber) + 1;
 
         // check if new card number pass verification (Luhn algo) 
-        while (!IsCreditCardNumberValid(nextValidCardNumber.ToString()))
+        while (!PassLuhn(nextValidCardNumber.ToString()))
             nextValidCardNumber++;
 
         if (String.Compare ( GetCreditCardVendor(nextValidCardNumber.ToString()), GetCreditCardVendor(cardNumber)) == 0)
@@ -70,10 +69,21 @@ class Program
         }
     }
 
+
     static bool IsCreditCardNumberValid(string cardNumber)
     {
-        int sumOfDigits = 0;
+        // check if card number contains white spaces
+        if (cardNumber.Contains(" "))
+            cardNumber = cardNumber.Replace(" ", "");
+        
+        return !(String.Compare(GetCreditCardVendor(cardNumber),"Unknown")==0);
+    }
+    
 
+    static bool PassLuhn(string cardNumber)
+    {
+        int sumOfDigits = 0;
+        bool passLuhn = false;
         // check if card number contains white spaces
         if (cardNumber.Contains(" "))
             cardNumber = cardNumber.Replace(" ", "");
@@ -97,7 +107,10 @@ class Program
         }
 
         // check if modulo 10 is equal to 0 
-        return sumOfDigits % 10 == 0;
+        if (sumOfDigits % 10 == 0)
+            passLuhn = true;
+            
+        return passLuhn;
     }
 
     static string GetCreditCardVendor(string cardNumber)
@@ -118,7 +131,7 @@ class Program
         // check given card number
         foreach(CardInfo currCard in cardVendorList)
         {
-            if (CheckRange(cardNumber, currCard.IIN) && CheckRange(cardNumber.Length.ToString(), currCard.cardNumberLenght) && IsCreditCardNumberValid(cardNumber)) 
+            if (CheckRange(cardNumber, currCard.IIN) && CheckRange(cardNumber.Length.ToString(), currCard.cardNumberLenght) && PassLuhn(cardNumber)) 
             {
                 return currCard.cardIssuer;
             }
@@ -149,4 +162,3 @@ public class CardInfo
         this.cardNumberLenght = ob.cardNumberLenght;
     }
 }
-
